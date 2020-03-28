@@ -15,11 +15,21 @@ class Cancion(models.Model):
     calificacion = models.DecimalField(max_digits=4,decimal_places=2, null=True)
     album = models.ForeignKey('Album',on_delete=models.CASCADE)
 
+    def __str__(self):
+        return "{} - {}".format(self.nombre,self.album)
+
+    class Meta:
+        verbose_name="Cancion"
+        verbose_name_plural="Canciones"
+
 class Album(models.Model):
     nombre = models.CharField(max_length=50, null=False)
     duracion = models.DecimalField(max_digits=4, decimal_places=2,null=True) 
     fecha = models.DateField(auto_now=False ,auto_now_add=False)
     foto = models.ImageField(upload_to=images_path,max_length=100)
+
+    def __str__(self):
+        return self.nombre
 
 class PlayList(models.Model):
     is_public = models.BooleanField()
@@ -30,6 +40,13 @@ class PlayListCanciones(models.Model):
     playlist = models.ForeignKey('PlayList',on_delete=models.CASCADE)
     cancion = models.ForeignKey('Cancion',on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.pk
+
+    class Meta:
+        verbose_name="UsuarioCanciones"
+        verbose_name_plural="UsuariosCanciones"
+
 class Disquera(models.Model):
     nombre = models.CharField(max_length=50)
     direccion = models.CharField(max_length=50)
@@ -38,6 +55,9 @@ class UsuarioCanciones(models.Model):
     id_usuario = models.ForeignKey('Usuario',on_delete=models.CASCADE)
     id_cancion = models.ForeignKey('Cancion',on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.pk
+        
 class Generos(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=50)
