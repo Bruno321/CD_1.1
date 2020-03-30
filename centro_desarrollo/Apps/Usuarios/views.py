@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
 # Create your views here.
 def renderizado(request):
-    return render(request,'index.html') 
+    return HttpResponse('mensaje por httpresponsejasjd')
+
+def home(request):
+    mensaje = 'mensaje desde la view App Usuarios'
+    return render(request,'reproduccion_home.html',{'mensaje':mensaje})

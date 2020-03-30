@@ -3,5 +3,5 @@ from django.urls import path
 from Apps.Usuarios import views as views_usuarios
 
 urlpatterns = [
-    path('usuarios/',views_usuarios.renderizado, ''),
+    path('home',views_usuarios.home, name="home"),
 ]
